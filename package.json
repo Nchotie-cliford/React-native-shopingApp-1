@@ -10,20 +10,23 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "expo": "~51.0.28",
+    "expo": "^52.0.7",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
-    "react-native": "0.74.5"
+    "react-dom": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-web": "~0.19.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
+    "@types/react-native": "^0.73.0",
     "eslint": "^8.57.0",
     "eslint-config-expo": "~7.1.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.3.3",
-    "typescript": "^5.1.3"
+    "typescript": "~5.3.3"
   },
   "private": true
 }
