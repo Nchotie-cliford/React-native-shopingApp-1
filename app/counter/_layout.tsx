@@ -1,5 +1,7 @@
 import { Link, Stack } from "expo-router";
-import { Text } from "react-native";
+import { Pressable, Text } from "react-native";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { theme } from "../../theme";
 
 export default function Layout() {
   return (
@@ -9,10 +11,21 @@ export default function Layout() {
         options={{
           title: "Count",
           headerRight: () => {
-            return <Text> Hello</Text>;
+            return (
+              <Link href="/counter/history" asChild>
+                <Pressable hitSlop={20}>
+                  <MaterialIcons
+                    name="history"
+                    size={32}
+                    color={theme.colorGrey}
+                  />
+                </Pressable>
+              </Link>
+            );
           },
         }}
       />
+      <Stack.Screen name="history" options={{ title: "History" }} />
     </Stack>
   );
 }
