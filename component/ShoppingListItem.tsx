@@ -1,13 +1,15 @@
-import { Alert, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable } from "react-native";
 import { theme } from "../theme";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 type Props = {
   name: string;
   isCompleted?: boolean;
-};
+  onDelete: () => void;
+  onToggleCompleted: () => void;
+}; 
 
-export function ShoppingListItem({ name, isCompleted }: Props) {
+export function ShoppingListItem({ name, isCompleted, onDelete, onToggleCompleted}: Props) {
   const handleDelete = () => {
     Alert.alert(
       `Are you sure you want to Delete ${name}?`,
@@ -15,7 +17,7 @@ export function ShoppingListItem({ name, isCompleted }: Props) {
       [
         {
           text: "Yes",
-          onPress: () => console.log("Ok , deleting"),
+          onPress: () => onDelete(),
           style: "destructive",
         },
 
@@ -28,11 +30,12 @@ export function ShoppingListItem({ name, isCompleted }: Props) {
   };
 
   return (
-    <View
+    <Pressable
       style={[
         styles.itemContainer,
         isCompleted ? styles.completedContainer : undefined,
       ]}
+      onPress={onToggleCompleted}
     >
       <Text
         style={[
@@ -49,7 +52,7 @@ export function ShoppingListItem({ name, isCompleted }: Props) {
          size={24} 
          color={isCompleted ? theme.colorGrey :  theme.colorRed} />
       </TouchableOpacity>
-    </View>
+    </Pressable>
   );
 }
 
