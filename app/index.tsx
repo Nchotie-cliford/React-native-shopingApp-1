@@ -7,6 +7,7 @@ type ShoppingListItemType = {
   id: string;
   name: string;
   completedAtTimeStamp?: number;
+  lastUpdatedTimestamp: number;
 };
 
 /*
@@ -31,7 +32,11 @@ export default function App() {
   const handleSubmit = () => {
     if (value) {
       const newShoppingList = [
-        { id: new Date().toTimeString(), name: value },
+        {
+          id: new Date().toTimeString(),
+          name: value,
+          lastUpdatedTimestamp: Date.now(),
+        },
         ...shoppingList, //spreading the list, adding new item to list
       ];
       setShoppingList(newShoppingList);
@@ -49,6 +54,7 @@ export default function App() {
       if (item.id == id) {
         return {
           ...item,
+          lastUpdatedTimestamp: Date.now(),
           completedAtTimeStamp: item.completedAtTimeStamp
             ? undefined
             : Date.now(),
@@ -71,7 +77,7 @@ export default function App() {
           returnKeyType="done"
         />
       }
-      data={shoppingList}
+      data={orderShoppingList (shoppingList)}
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
       stickyHeaderIndices={[0]}
@@ -85,11 +91,35 @@ export default function App() {
           name={item.name}
           onDelete={() => handleDelete(item.id)}
           onToggleCompleted={() => handleToggleComplete(item.id)}
-          isCompleted = {Boolean(item.completedAtTimeStamp)}
+          isCompleted={Boolean(item.completedAtTimeStamp)}
         />
       )}
     ></FlatList>
   );
+}
+
+//javascript sorting function:
+
+function orderShoppingList(shoppingList: ShoppingListItemType[]) {
+  return shoppingList.sort((item1, item2) => {
+    if (item1.completedAtTimeStamp && item2.completedAtTimeStamp) {
+      return item2.completedAtTimeStamp - item1.completedAtTimeStamp;
+    }
+
+    if (item1.completedAtTimeStamp && !item2.completedAtTimeStamp) {
+      return 1;
+    }
+
+    if (!item1.completedAtTimeStamp && item2.completedAtTimeStamp) {
+      return -1;
+    }
+
+    if (!item1.completedAtTimeStamp && !item2.completedAtTimeStamp) {
+      return item2.lastUpdatedTimestamp - item1.lastUpdatedTimestamp;
+    }
+
+    return 0;
+  });
 }
 
 //styles
@@ -98,7 +128,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     //justifyContent: "center",
-    padding: 12,
+    paddingVertical: 12,
   },
   contentContainer: {
     paddingBottom: 24,
