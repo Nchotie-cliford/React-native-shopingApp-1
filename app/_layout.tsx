@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Tabs } from "expo-router";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Feather } from "@expo/vector-icons";
@@ -7,7 +8,7 @@ import { theme } from "../theme";
 
 export default function Layout() {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorCerulean}}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: theme.colorCerulean }}>
       <Tabs.Screen
         name="index"
         options={{

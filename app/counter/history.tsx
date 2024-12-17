@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { View, Text , StyleSheet } from "react-native";
 
 export default function HistoryScreen () {

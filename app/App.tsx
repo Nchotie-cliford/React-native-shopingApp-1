@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, View } from "react-native";
 import { ShoppingListItem } from "../component/ShoppingListItem";
 import { theme } from "../theme";
